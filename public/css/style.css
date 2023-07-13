@@ -1,3 +1,11 @@
+body {
+    overflow-x: hidden !important;
+}
+
 .card-hover:hover {
     box-shadow: 0px 5px 40px rgba(29, 34, 47, 0.15) !important;
+}
+
+.bg-theme {
+    background-color: #696cff !important;
 }

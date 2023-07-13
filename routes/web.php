@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route Pages
-Route::get('/', [PageController::class, 'dashboard'])->name('dashboard.page');
+Route::get('/', [PageController::class, 'index'])->name('index.page');
+Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard.page');
 
 // Route for Auth
 Route::get('/register', [AuthController::class, 'register'])->name('register.page');
