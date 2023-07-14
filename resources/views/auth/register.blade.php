@@ -103,39 +103,54 @@
                         <h4 class="mb-2">Petualangan dimulai disini 🚀</h4>
                         <p class="mb-4">Daftarkan akun Anda untuk memulai hal baru!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('dashboard.page') }}"
+                        <form id="formAuthentication" class="mb-3" action="{{ route('do.register') }}"
                             method="POST">
+                            @csrf
+
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Masukkan username" autofocus />
+                                <label for="name" class="form-label">Username</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" placeholder="Masukkan username" autofocus />
+                                @error('name')
+                                    <div id="nameHelp" class="form-text">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Masukkan email" />
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    id="email" name="email" placeholder="Masukkan email" />
+                                @error('email')
+                                    <div id="nameHelp" class="form-text">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
+                                    <input type="password" id="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
+                                @error('password')
+                                    <div id="passwordHelp" class="form-text">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="mb-3 form-password-toggle">
-                                <label class="form-label" for="password">Konfirmasi Password</label>
+                                <label class="form-label" for="password_confirmation">Konfirmasi Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="confirm_password" class="form-control"
-                                        name="confirm_password"
+                                    <input type="password" id="password_confirmation" class="form-control"
+                                        name="password_confirmation"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
 
-                            <button class="btn btn-primary d-grid w-100 mt-4">Daftar Sekarang</button>
+                            <button class="btn btn-primary d-grid w-100 mt-4" type="submit">Daftar Sekarang</button>
                         </form>
 
                         <p class="text-center">

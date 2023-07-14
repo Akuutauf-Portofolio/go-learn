@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
@@ -19,5 +23,42 @@ class AuthController extends Controller
     public function forgot_password()
     {
         return view('auth.forgot-password');
+    }
+
+    public function doRegister(Request $request)
+    {
+        // validation
+        $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'max:100', 'email', 'unique:' . User::class],
+            'password' => ['required', 'confirmed'],
+            'password_confirmation' => ['required', Rules\Password::defaults()],
+        ]);
+
+        // register user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'verification_code' => rand(1000, 9999),
+            'password' => Hash::make($request->password),
+        ]);
+
+        // assign as user
+        $user->assignRole('user');
+
+        // login proccess
+        Auth::login($user);
+
+        return redirect()->route('dashboard.page');
+    }
+
+    public function doLogout(Request $request)
+    {
+        // fungsi logout
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index.page');
     }
 }
