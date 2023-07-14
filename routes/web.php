@@ -18,19 +18,27 @@ use Illuminate\Support\Facades\Route;
 
 // Route Pages
 Route::get('/', [PageController::class, 'index'])->name('index.page');
-
-// Route for Auth
-Route::get('/register', [AuthController::class, 'register'])->name('register.page');
-Route::post('/register', [AuthController::class, 'doRegister'])->name('do.register');
-
-Route::get('/verification-code', [VerificationController::class, 'verification_code_page'])->name('verification.page');
-
-Route::get('/login', [AuthController::class, 'login'])->name('login.page');
+Route::get('/logout', [AuthController::class, 'doLogout'])->name('do.logout');
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password.page');
 
-Route::get('/logout', [AuthController::class, 'doLogout'])->name('do.logout');
+// verification
+Route::get('/verify-code', [VerificationController::class, 'verify_code'])->name('verify.code');
+Route::get('/verify-email', [VerificationController::class, 'verify_email'])->name('verify.email');
+
+Route::middleware(['guest'])->group(function () {
+    // Route for Auth
+    Route::get('/register', [AuthController::class, 'register'])->name('register.page');
+    Route::post('/register', [AuthController::class, 'doRegister'])->name('do.register');
+
+    Route::get('/login', [AuthController::class, 'login'])->name('login.page');
+    Route::post('/login', [AuthController::class, 'doLogin'])->name('do.login');
+});
 
 // route for user has been authenticated
 Route::middleware('auth', 'role:user')->group(function () {
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard.page');
+});
+
+Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard.page');
 });

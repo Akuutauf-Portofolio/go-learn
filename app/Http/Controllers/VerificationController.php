@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    public function verification_code_page()
+    public function verify_email()
+    {
+        return view('auth.verify-email');
+    }
+
+    public function verify_code()
     {
         return view('auth.verify-email');
     }

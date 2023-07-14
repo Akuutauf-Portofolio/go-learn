@@ -51,7 +51,8 @@
                                 <p class="mb-4">Silahkan tekan tombol berikut untuk melanjutkan!</p>
 
                                 <div class="mb-3 mt-4">
-                                    <a href="" class="btn btn-primary d-grid w-100" type="submit">Kirim Code</a>
+                                    <a href="{{ route('verification.notice') }}" class="btn btn-primary d-grid w-100"
+                                        type="submit">Kirim Code</a>
                                 </div>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -51,6 +52,26 @@ class AuthController extends Controller
 
         return redirect()->route('dashboard.page');
     }
+
+    public function doLogin(Request $request)
+    {
+        // validasi
+        $credentials = $request->validate([
+            'email' => ['required', 'string', 'max:100', 'email'],
+            'password' => ['required', Rules\Password::defaults()],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if (auth()->user()->hasRole('admin')) {
+                return redirect()->intended('/dashboard');
+            } else if (auth()->user()->hasRole('user')) {
+                return redirect()->route('dashboard.page');
+            }
+        }
+    }
+
 
     public function doLogout(Request $request)
     {

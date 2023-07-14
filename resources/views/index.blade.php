@@ -110,8 +110,15 @@
                                 <p class="mb-4">Silahkan login untuk melanjutkan!</p>
 
                                 <div class="mb-3 mt-4">
-                                    <a href="{{ route('login.page') }}" class="btn btn-primary d-grid w-100"
-                                        type="submit">Mulai Sekarang</a>
+                                    @guest
+                                        <a href="{{ route('login.page') }}" class="btn btn-primary d-grid w-100"
+                                            type="submit">Mulai Sekarang</a>
+                                    @endguest
+
+                                    @auth
+                                        <a href="{{ route('dashboard.page') }}" class="btn btn-primary d-grid w-100"
+                                            type="submit">Masuk Dashboard</a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
