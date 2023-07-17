@@ -10,9 +10,4 @@ class AdminPageController extends Controller
     {
         return view('admin.dashboard-admin');
     }
-
-    public function profile_admin()
-    {
-        return view('admin.profile-admin');
-    }
 }

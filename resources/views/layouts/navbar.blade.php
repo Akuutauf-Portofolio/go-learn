@@ -58,12 +58,12 @@
                     <li>
                         @can('edit profile')
                             @if (auth()->user()->hasRole('admin'))
-                                <a class="dropdown-item" href="{{ route('profile.admin.page') }}">
+                                <a class="dropdown-item" href="{{ route('profile.admin.page', auth()->user()->id) }}">
                                     <i class="bx bx-user me-2"></i>
                                     <span class="align-middle">Profil Saya</span>
                                 </a>
                             @else
-                                <a class="dropdown-item" href="{{ route('profile.user.page') }}">
+                                <a class="dropdown-item" href="{{ route('profile.user.page', auth()->user()->id) }}">
                                     <i class="bx bx-user me-2"></i>
                                     <span class="align-middle">Profil Saya</span>
                                 </a>
@@ -72,7 +72,7 @@
                     </li>
                     <li>
                         @can('delete account')
-                            <a class="dropdown-item" href="{{ route('setting.user.page') }}">
+                            <a class="dropdown-item" href="{{ route('setting.user.page', auth()->user()->id) }}">
                                 <i class="bx bx-cog me-2"></i>
                                 <span class="align-middle">Pengaturan</span>
                             </a>
