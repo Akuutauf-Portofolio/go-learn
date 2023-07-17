@@ -26,6 +26,11 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'delete account',
+            'guard_name' => 'web',
+        ]);
+
+        Permission::create([
             'name' => 'manage permit',
             'guard_name' => 'web',
         ]);

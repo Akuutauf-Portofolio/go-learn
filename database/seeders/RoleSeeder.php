@@ -43,6 +43,7 @@ class RoleSeeder extends Seeder
         $can_booking = $permissions->where('name', 'can booking')->first();
         $can_read = $permissions->where('name', 'can read')->first();
         $review_book = $permissions->where('name', 'review_book')->first();
-        $user->givePermissionTo([$edit_profile, $forgot_password, $search_book, $withlist_book, $can_booking, $can_read, $review_book]);
+        $delete_account = $permissions->where('name', 'delete account')->first();
+        $user->givePermissionTo([$edit_profile, $forgot_password, $search_book, $withlist_book, $can_booking, $can_read, $review_book, $delete_account]);
     }
 }

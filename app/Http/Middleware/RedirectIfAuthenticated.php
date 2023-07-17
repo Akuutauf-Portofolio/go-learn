@@ -21,9 +21,9 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         if (Auth::check() && Auth::user() && auth()->user()->hasRole('admin')) {
-            return redirect()->route('dashboard.page');
+            return redirect()->route('dashboard.admin.page');
         } else if (Auth::check() && Auth::user() && auth()->user()->hasRole('user')) {
-            return redirect()->route('dashboard.page');
+            return redirect()->route('dashboard.user.page');
         }
 
         $guards = empty($guards) ? [null] : $guards;

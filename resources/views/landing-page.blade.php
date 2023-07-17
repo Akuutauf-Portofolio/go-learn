@@ -49,7 +49,7 @@
                             <div class="card-body">
                                 <!-- Logo -->
                                 <div class="app-brand justify-content-center">
-                                    <a href="{{ route('dashboard.page') }}" class="app-brand-link gap-2">
+                                    <a href="#" class="app-brand-link gap-2">
                                         <span class="app-brand-logo demo">
                                             <svg width="25" viewBox="0 0 25 42" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +116,13 @@
                                     @endguest
 
                                     @auth
-                                        <a href="{{ route('dashboard.page') }}" class="btn btn-primary d-grid w-100"
-                                            type="submit">Masuk Dashboard</a>
+                                        @if (auth()->user()->hasRole('admin'))
+                                            <a href="{{ route('dashboard.admin.page') }}"
+                                                class="btn btn-primary d-grid w-100">Masuk Dashboard</a>
+                                        @else
+                                            <a href="{{ route('dashboard.user.page') }}"
+                                                class="btn btn-primary d-grid w-100">Masuk Dashboard</a>
+                                        @endif
                                     @endauth
                                 </div>
                             </div>

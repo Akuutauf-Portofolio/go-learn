@@ -50,7 +50,7 @@ class AuthController extends Controller
         // login proccess
         Auth::login($user);
 
-        return redirect()->route('dashboard.page');
+        return redirect()->route('dashboard.user.page');
     }
 
     public function doLogin(Request $request)
@@ -65,9 +65,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if (auth()->user()->hasRole('admin')) {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/dashboard-admin');
             } else if (auth()->user()->hasRole('user')) {
-                return redirect()->route('dashboard.page');
+                return redirect()->route('dashboard.user.page');
             }
         }
     }
@@ -80,6 +80,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('index.page');
+        return redirect()->route('landing.page');
     }
 }

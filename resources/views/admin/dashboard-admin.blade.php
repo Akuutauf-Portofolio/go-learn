@@ -1,7 +1,7 @@
 @extends('layouts.template-user')
 
 @section('title')
-    <title>Dashboard | Project App</title>
+    <title>Dashboard Admin | Grow-lib App</title>
 @endsection
 
 @section('content')
@@ -497,4 +497,8 @@
         </div>
         <!--/ Transactions -->
     </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('template/assets/js/dashboards-analytics.js') }}"></script>
 @endsection

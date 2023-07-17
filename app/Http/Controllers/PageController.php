@@ -6,13 +6,8 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index()
+    public function landing_page()
     {
-        return view('index');
-    }
-
-    public function dashboard()
-    {
-        return view('dashboard');
+        return view('landing-page');
     }
 }
