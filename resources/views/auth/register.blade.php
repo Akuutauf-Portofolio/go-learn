@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Buat Akun | Grow-lib App</title>
+    <title>Buat Akun | Growlib App</title>
 
     <meta name="description" content="" />
 
@@ -96,7 +96,7 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <span class="app-brand-text demo text-body fw-bolder">Grow-lib</span>
+                                <span class="app-brand-text demo text-body fw-bolder">Growlib</span>
                             </a>
                         </div>
                         <!-- /Logo -->

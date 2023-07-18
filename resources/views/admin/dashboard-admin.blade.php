@@ -1,7 +1,7 @@
 @extends('layouts.template-user')
 
 @section('title')
-    <title>Dashboard Admin | Grow-lib App</title>
+    <title>Dashboard Admin | Growlib App</title>
 @endsection
 
 @section('content')

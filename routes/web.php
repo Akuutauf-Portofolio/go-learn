@@ -42,13 +42,20 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware('auth', 'role:user')->group(function () {
     Route::get('/dashboard-user', [UserPageController::class, 'dashboard_user'])->name('dashboard.user.page');
 
-    // manage profile
+    // manage profile user
     Route::get('/profile-user/{user_id}', [UserProfileController::class, 'profile_user'])->name('profile.user.page');
     Route::put('/profile-user/{user_id}', [UserProfileController::class, 'update'])->name('do.update.profile.user');
+    Route::put('/profile-user/update-password/{user_id}', [UserProfileController::class, 'update_password'])->name('do.update.password.user');
+
+    // setting user
     Route::get('/setting-user/{user_id}', [UserPageController::class, 'setting_user'])->name('setting.user.page');
 });
 
 Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/dashboard-admin', [AdminPageController::class, 'dashboard_admin'])->name('dashboard.admin.page');
-    Route::get('/profile-admin/{user_id}', [AdminProfileController::class, 'profile_admin'])->name('profile.admin.page');
+
+    // manage profile admin
+    Route::get('/profile-admin/{admin_id}', [AdminProfileController::class, 'profile_admin'])->name('profile.admin.page');
+    Route::put('/profile-admin/{admin_id}', [AdminProfileController::class, 'update'])->name('do.update.profile.admin');
+    Route::put('/profile-admin/update-password/{admin_id}', [AdminProfileController::class, 'update_password'])->name('do.update.password.admin');
 });

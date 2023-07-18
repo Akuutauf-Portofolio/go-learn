@@ -1,7 +1,7 @@
 @extends('layouts.template-user')
 
 @section('title')
-    <title>Setting User Akun | Grow-lib App</title>
+    <title>Setting User Akun | Growlib App</title>
 @endsection
 
 @section('content')

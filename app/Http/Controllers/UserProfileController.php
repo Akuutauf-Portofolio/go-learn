@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
     public function profile_user($user_id)
     {
+        if (Auth::user()->id != $user_id) {
+            abort(404);
+        }
+
         $data = [
             'user' => User::findOrFail($user_id),
             'role_name' => User::findOrFail($user_id)->roles->pluck('name')->first(),
             'action' => route('do.update.profile.user', $user_id),
+            'action_password' => route('do.update.password.user', $user_id),
         ];
 
         return view('users.profile-user', $data);
@@ -82,17 +89,54 @@ class UserProfileController extends Controller
     {
         $data = User::findOrFail($user_id);
 
-        // perintah update profile admin
+        // validasi field
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'old_password' => 'nullable',
-            'new_password' => 'nullable',
-            'confirm_new_password' => 'nullable',
             'photo' => 'mimes:jpg,jpeg,png|max:5120',
             'birthdate' => 'required',
             'gender' => 'required',
             'phone' => 'required',
+        ]);
+
+        // checking any field photo
+        if ($request->file('photo')) {
+            // if user does not have photo
+            if ($data->photo == null || $data->photo == '') {
+                $saveData['photo'] = Storage::putFile('public/user', $request->file('photo'));
+            } else {
+                //   delete any photo files that own already
+                Storage::delete($data->photo);
+
+                // and then save new photo
+                $saveData['photo'] = Storage::putFile('public/user', $request->file('photo'));
+            }
+        } else {
+            $saveData['photo'] = $data->photo;
+        }
+
+        // update an data user profile
+        User::where('id', $user_id)->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'photo' =>  $saveData['photo'],
+            'birthdate' => $validated['birthdate'],
+            'gender' => $validated['gender'],
+            'phone' => $validated['phone'],
+        ]);
+
+        return redirect()->route('profile.user.page', $data);
+    }
+
+    public function update_password(Request $request, $user_id)
+    {
+        $data = User::findOrFail($user_id);
+
+        // validasi field
+        $validated = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_new_password' => 'required',
         ]);
     }
 

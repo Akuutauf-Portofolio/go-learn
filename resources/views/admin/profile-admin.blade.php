@@ -1,7 +1,7 @@
 @extends('layouts.template-user')
 
 @section('title')
-    <title>Manajemen Profil Admin | Grow-lib App</title>
+    <title>Manajemen Profil Admin | Growlib App</title>
 @endsection
 
 @section('content')
@@ -16,21 +16,25 @@
                 <h5 class="card-header">Detail Profil</h5>
                 <!-- Account -->
                 <form action="{{ $action }}" id="formAccountSettings" method="POST" enctype="multipart/form-data">
-                    @csrf
                     @method('put')
+                    @csrf
 
                     <div class="card-body">
                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                            <img src="{{ asset('template/assets/img/avatars/1.png') }}" alt="user-avatar"
-                                class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            @if ($user->photo == null || $user->photo == '')
+                                <img src="{{ asset('template/assets/img/avatars/1.png') }}" alt="user-avatar"
+                                    class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            @else
+                                <img src="{{ Storage::url($user->photo) }}" alt="user-avatar" class="d-block rounded"
+                                    height="100" width="100" id="uploadedAvatar" />
+                            @endif
                             <div class="button-wrapper">
-                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <label for="photo" class="btn btn-primary me-2 mb-4" tabindex="0">
                                     <span class="d-none d-sm-block">Unggah foto baru</span>
                                     <i class="bx bx-upload d-block d-sm-none"></i>
-                                    <input type="file" id="upload" class="account-file-input" hidden
-                                        accept="image/png, image/jpeg" />
+                                    <input type="file" id="photo" name="photo" class="account-file-input" hidden />
                                 </label>
-                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <button type="reset" class="btn btn-outline-secondary account-image-reset mb-4">
                                     <i class="bx bx-reset d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Batal</span>
                                 </button>
@@ -70,19 +74,23 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="gender" class="form-label">Gender</label>
-                                <select id="gender" name="gender" class="select2 form-select">
+                                <select id="gender" name="gender"
+                                    class="select2 form-select @error('gender') is-invalid @enderror">
                                     <option value="">Pilih Gender</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Laki-laki" {{ $user->gender == 'Laki-laki' ? 'selected' : '' }}>
+                                        Laki-laki</option>
+                                    <option value="Perempuan" {{ $user->gender == 'Perempuan' ? 'selected' : '' }}>
+                                        Perempuan</option>
                                 </select>
                                 @error('gender')
                                     <div id="nameHelp" class="form-text">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="phone" class="form-label">Nomor Telp.</label>
+                                <label for="phone" class="form-label">Nomor Telepon</label>
                                 <input class="form-control @error('phone') is-invalid @enderror" type="number"
-                                    id="phone" name="phone" value="{{ $user->phone }}" placeholder="Nomor Telepon" />
+                                    id="phone" name="phone" value="{{ $user->phone }}"
+                                    placeholder="Nomor Telepon" />
                                 @error('phone')
                                     <div id="nameHelp" class="form-text">{{ $message }}</div>
                                 @enderror
@@ -95,85 +103,85 @@
                                     name="change_password_button">
                                     Ubah Password
                                 </button>
-
-                                <div class="modal fade" tabindex="-1" id="modal_change_password">
-                                    <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Ganti Password Baru</h5>
-
-                                                <!--begin::Close-->
-                                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-                                                    data-bs-dismiss="modal" aria-label="Close">
-                                                    <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span
-                                                            class="path2"></span></i>
-                                                </div>
-                                                <!--end::Close-->
-                                            </div>
-
-                                            <form action="">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="mb-3 col-md-12">
-                                                            <label for="old_password" class="form-label">Password
-                                                                Lama</label>
-                                                            <input
-                                                                class="form-control @error('old_password') is-invalid @enderror"
-                                                                type="text" id="old_password" name="old_password"
-                                                                placeholder="Password Lama Anda" />
-                                                            @error('old_password')
-                                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3 col-md-12">
-                                                            <label for="new_password" class="form-label">Password
-                                                                Baru</label>
-                                                            <input
-                                                                class="form-control @error('new_password') is-invalid @enderror"
-                                                                type="text" id="new_password" name="new_password"
-                                                                placeholder="Password Baru Anda" />
-                                                            @error('new_password')
-                                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3 col-md-12">
-                                                            <label for="confirm_password_new"
-                                                                class="form-label">Konfirmasi Password
-                                                                Baru</label>
-                                                            <input
-                                                                class="form-control @error('confirm_password_new') is-invalid @enderror"
-                                                                type="text" id="confirm_password_new"
-                                                                name="confirm_password_new"
-                                                                placeholder="Konfirmasi Password" />
-                                                            @error('confirm_password_new')
-                                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <a href="#" type="button" class="btn btn-light"
-                                                        data-bs-dismiss="modal">Tutup</a>
-                                                    <button type="button" class="btn btn-primary">Simpan</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Simpan perubahan</button>
-                            <a href="#" type="button" class="btn btn-outline-secondary">Batal</a>
+                            <button type="reset" class="btn btn-outline-secondary">Batal</button>
                         </div>
                     </div>
                 </form>
                 <!-- /Account -->
+
+                {{-- Modal Update Password --}}
+                <div class="modal fade" tabindex="-1" id="modal_change_password">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ganti Password Baru</h5>
+
+                                <!--begin::Close-->
+                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span
+                                            class="path2"></span></i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+
+                            <form action="{{ $action_password }}" id="formAccountSettings" method="POST">
+                                @csrf
+                                @method('put')
+
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-12">
+                                            <label for="old_password" class="form-label">Password
+                                                Lama</label>
+                                            <input class="form-control @error('old_password') is-invalid @enderror"
+                                                type="text" id="old_password" name="old_password"
+                                                placeholder="Password Lama Anda" />
+                                            @error('old_password')
+                                                <div id="passwordhelp" class="form-text">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 col-md-12">
+                                            <label for="new_password" class="form-label">Password
+                                                Baru</label>
+                                            <input class="form-control @error('new_password') is-invalid @enderror"
+                                                type="text" id="new_password" name="new_password"
+                                                placeholder="Password Baru Anda" />
+                                            @error('new_password')
+                                                <div id="passwordhelp" class="form-text">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 col-md-12">
+                                            <label for="confirm_new_password" class="form-label">Konfirmasi Password
+                                                Baru</label>
+                                            <input class="form-control @error('confirm_new_password') is-invalid @enderror"
+                                                type="text" id="confirm_new_password" name="confirm_new_password"
+                                                placeholder="Konfirmasi Password" />
+                                            @error('confirm_new_password')
+                                                <div id="passwordhelp" class="form-text">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <a href="#" type="button" class="btn btn-light"
+                                        data-bs-dismiss="modal">Tutup</a>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
