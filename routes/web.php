@@ -49,6 +49,7 @@ Route::middleware('auth', 'role:user')->group(function () {
 
     // setting user
     Route::get('/setting-user/{user_id}', [UserPageController::class, 'setting_user'])->name('setting.user.page');
+    Route::post('/delete-account-user/{user_id}', [UserPageController::class, 'delete_account'])->name('do.delete.account.user');
 });
 
 Route::middleware('auth', 'role:admin')->group(function () {

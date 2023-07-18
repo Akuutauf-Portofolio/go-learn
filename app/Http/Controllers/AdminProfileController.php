@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class AdminProfileController extends Controller
 {
@@ -126,6 +127,29 @@ class AdminProfileController extends Controller
         ]);
 
         return redirect()->route('profile.admin.page', $data);
+    }
+
+    public function update_password(Request $request, $admin_id)
+    {
+        $data = User::findOrFail($admin_id);
+
+        // validasi field
+        $request->validate([
+            'old_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'confirm_new_password' => 'required|same:new_password',
+        ]);
+
+        // Memeriksa apakah kata sandi lama yang dimasukkan sesuai dengan kata sandi saat ini
+        if (!Hash::check($request->old_password, $data->password)) {
+            return back()->with('error', 'Kata sandi lama yang dimasukkan salah.');
+        }
+
+        // Update kata sandi baru
+        $data->password = Hash::make($request->new_password);
+        $data->save();
+
+        return redirect()->route('profile.admin.page', $admin_id);
     }
 
     /**

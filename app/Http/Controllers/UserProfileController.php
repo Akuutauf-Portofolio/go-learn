@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController extends Controller
 {
@@ -125,7 +126,7 @@ class UserProfileController extends Controller
             'phone' => $validated['phone'],
         ]);
 
-        return redirect()->route('profile.user.page', $data);
+        return redirect()->route('profile.user.page', $user_id);
     }
 
     public function update_password(Request $request, $user_id)
@@ -133,11 +134,22 @@ class UserProfileController extends Controller
         $data = User::findOrFail($user_id);
 
         // validasi field
-        $validated = $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required',
-            'confirm_new_password' => 'required',
+        $request->validate([
+            'old_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'confirm_new_password' => 'required|same:new_password',
         ]);
+
+        // Memeriksa apakah kata sandi lama yang dimasukkan sesuai dengan kata sandi saat ini
+        if (!Hash::check($request->old_password, $data->password)) {
+            return back();
+        }
+
+        // Update kata sandi baru
+        $data->password = Hash::make($request->new_password);
+        $data->save();
+
+        return redirect()->route('profile.user.page', $user_id);
     }
 
     /**

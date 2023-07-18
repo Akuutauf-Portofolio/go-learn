@@ -131,44 +131,61 @@
                             </div>
 
                             <form action="{{ $action_password }}" id="formAccountSettings" method="POST">
-                                @csrf
                                 @method('put')
+                                @csrf
 
                                 <div class="modal-body">
                                     <div class="row">
+
                                         <div class="mb-3 col-md-12">
                                             <label for="old_password" class="form-label">Password
                                                 Lama</label>
-                                            <input class="form-control @error('old_password') is-invalid @enderror"
-                                                type="text" id="old_password" name="old_password"
-                                                placeholder="Password Lama Anda" />
+
+                                            <div class="input-group input-group-merge">
+                                                <input type="password" id="old_password"
+                                                    class="form-control @error('old_password') is-invalid @enderror"
+                                                    name="old_password" placeholder="Password Lama Anda"
+                                                    aria-describedby="old_password" />
+                                                <span class="input-group-text cursor-pointer" id="toggle_old_password"><i
+                                                        class="bx bx-hide"></i></span>
+                                            </div>
                                             @error('old_password')
-                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                </div>
+                                                <div id="old_password" class="form-text">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="mb-3 col-md-12">
-                                            <label for="new_password" class="form-label">Password
-                                                Baru</label>
-                                            <input class="form-control @error('new_password') is-invalid @enderror"
-                                                type="text" id="new_password" name="new_password"
-                                                placeholder="Password Baru Anda" />
+                                            <label for="new_password" class="form-label">Password Baru</label>
+
+                                            <div class="input-group input-group-merge">
+                                                <input type="password" id="new_password"
+                                                    class="form-control @error('new_password') is-invalid @enderror"
+                                                    name="new_password" placeholder="Password Lama Anda"
+                                                    aria-describedby="new_password" />
+                                                <span class="input-group-text cursor-pointer" id="toggle_new_password"><i
+                                                        class="bx bx-hide"></i></span>
+                                            </div>
                                             @error('new_password')
-                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                </div>
+                                                <div id="new_password" class="form-text">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="mb-3 col-md-12">
-                                            <label for="confirm_new_password" class="form-label">Konfirmasi Password
-                                                Baru</label>
-                                            <input class="form-control @error('confirm_new_password') is-invalid @enderror"
-                                                type="text" id="confirm_new_password" name="confirm_new_password"
-                                                placeholder="Konfirmasi Password" />
+                                            <label for="confirm_new_password" class="form-label">Password Baru</label>
+
+                                            <div class="input-group input-group-merge">
+                                                <input type="password" id="confirm_new_password"
+                                                    class="form-control @error('confirm_new_password') is-invalid @enderror"
+                                                    name="confirm_new_password" placeholder="Password Lama Anda"
+                                                    aria-describedby="confirm_new_password" />
+                                                <span class="input-group-text cursor-pointer"
+                                                    id="toggle_confirm_new_password"><i class="bx bx-hide"></i></span>
+                                            </div>
                                             @error('confirm_new_password')
-                                                <div id="passwordhelp" class="form-text">{{ $message }}
-                                                </div>
+                                                <div id="confirm_new_password" class="form-text">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -185,4 +202,50 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        // for old password class
+        const toggle_old_password = document.getElementById('toggle_old_password');
+        const old_password = document.getElementById('old_password');
+
+        // for new password class
+        const toggle_new_password = document.getElementById('toggle_new_password');
+        const new_password = document.getElementById('new_password');
+
+        // for confirm new password class
+        const toggle_confirm_new_password = document.getElementById('toggle_confirm_new_password');
+        const confirm_new_password = document.getElementById('confirm_new_password');
+
+        toggle_old_password.addEventListener('click', function() {
+            if (old_password.type === 'password') {
+                old_password.type = 'text';
+                toggle_old_password.innerHTML = '<i class="bx bx-show"></i>';
+            } else {
+                old_password.type = 'password';
+                toggle_old_password.innerHTML = '<i class="bx bx-hide"></i>';
+            }
+        });
+
+        toggle_new_password.addEventListener('click', function() {
+            if (new_password.type === 'password') {
+                new_password.type = 'text';
+                toggle_new_password.innerHTML = '<i class="bx bx-show"></i>';
+            } else {
+                new_password.type = 'password';
+                toggle_new_password.innerHTML = '<i class="bx bx-hide"></i>';
+            }
+        });
+
+        toggle_confirm_new_password.addEventListener('click', function() {
+            if (confirm_new_password.type === 'password') {
+                confirm_new_password.type = 'text';
+                toggle_confirm_new_password.innerHTML = '<i class="bx bx-show"></i>';
+            } else {
+                confirm_new_password.type = 'password';
+                toggle_confirm_new_password.innerHTML = '<i class="bx bx-hide"></i>';
+            }
+        });
+    </script>
 @endsection

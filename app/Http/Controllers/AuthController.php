@@ -61,6 +61,7 @@ class AuthController extends Controller
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
+        // mengecek kredential ketika request login berlangsung
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -70,6 +71,11 @@ class AuthController extends Controller
                 return redirect()->route('dashboard.user.page');
             }
         }
+
+        // menampilkan pesan error jika kredential yang dimasukkan salah
+        return back()->withErrors([
+            'email' => 'Email and password invalid.',
+        ])->onlyInput('email');
     }
 
 
