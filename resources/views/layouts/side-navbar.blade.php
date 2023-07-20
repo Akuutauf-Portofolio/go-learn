@@ -112,32 +112,42 @@
             </ul>
         </li> --}}
 
+        {{-- Menu Manajemen Role --}}
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Manajemen</span>
         </li>
-        {{-- <li class="menu-item">
+        <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
+                <div data-i18n="Account Settings">Manajemen Spatie</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
-                        <div data-i18n="Account">Account</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
-                        <div data-i18n="Notifications">Notifications</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
-                        <div data-i18n="Connections">Connections</div>
-                    </a>
-                </li>
+                @can('manage user')
+                    <li class="menu-item">
+                        <a href="{{ route('manage.user.page') }}" class="menu-link">
+                            <div data-i18n="User">User</div>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('manage role')
+                    <li class="menu-item">
+                        <a href="{{ route('manage.role.page') }}" class="menu-link">
+                            <div data-i18n="Role">Role</div>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('manage permit')
+                    <li class="menu-item">
+                        <a href="{{ route('manage.permission.page') }}" class="menu-link">
+                            <div data-i18n="Permission">Permission</div>
+                        </a>
+                    </li>
+                @endcan
             </ul>
-        </li> --}}
+        </li>
+
         {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>

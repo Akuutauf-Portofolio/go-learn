@@ -21,7 +21,7 @@ class UserPageController extends Controller
         ];
 
         if (Auth::user()->id != $user_id) {
-            abort(404);
+            return redirect()->route('error.page');
         }
 
         return view('users.setting-user', $data);

@@ -21,28 +21,26 @@
 
                     <div class="card-body">
                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                            @if ($user->photo == null || $user->photo == '')
-                                <img src="{{ asset('template/assets/img/avatars/1.png') }}" alt="user-avatar"
-                                    class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
-                            @else
-                                <img src="{{ Storage::url($user->photo) }}" alt="user-avatar" class="d-block rounded"
-                                    height="100" width="100" id="uploadedAvatar" />
-                            @endif
+                            <img src="{{ $user->photo ? Storage::url($user->photo) : asset('template/assets/img/avatars/1.png') }}"
+                                alt="user-avatar" class="d-block rounded" height="100" width="100"
+                                id="uploadedAvatar" />
                             <div class="button-wrapper">
                                 <label for="photo" class="btn btn-primary me-2 mb-4" tabindex="0">
                                     <span class="d-none d-sm-block">Unggah foto baru</span>
                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                     <input type="file" id="photo" name="photo" class="account-file-input" hidden />
                                 </label>
-                                <button type="reset" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <button type="reset" class="btn btn-outline-secondary account-image-reset mb-4"
+                                    onclick="resetImage()">
                                     <i class="bx bx-reset d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Batal</span>
                                 </button>
 
-                                <p class="text-muted mb-0">Allowed JPG, JPEG or PNG. Max size of 5Mb</p>
+                                <p class="text-muted mb-0">Allowed JPG, JPEG, or PNG. Max size of 5Mb</p>
                             </div>
                         </div>
                     </div>
+
                     <hr class="my-0" />
                     <div class="card-body">
                         <div class="row">
@@ -245,6 +243,38 @@
             } else {
                 confirm_new_password.type = 'password';
                 toggle_confirm_new_password.innerHTML = '<i class="bx bx-hide"></i>';
+            }
+        });
+    </script>
+
+    {{-- Script Upload Foto --}}
+    <script>
+        function resetImage() {
+            // Reset the input file by cloning it
+            const fileInput = document.getElementById('photo');
+            const newFileInput = fileInput.cloneNode(true);
+            fileInput.parentNode.replaceChild(newFileInput, fileInput);
+
+            // Reset the image source back to the original photo
+            const uploadedAvatar = document.getElementById('uploadedAvatar');
+            const originalPhoto =
+                "{{ $user->photo ? Storage::url($user->photo) : asset('template/assets/img/avatars/1.png') }}";
+            uploadedAvatar.src = originalPhoto;
+        }
+
+        const fileInput = document.getElementById('photo');
+        const uploadedAvatar = document.getElementById('uploadedAvatar');
+
+        fileInput.addEventListener('change', function() {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function() {
+                    uploadedAvatar.src = reader.result;
+                };
+
+                reader.readAsDataURL(file);
             }
         });
     </script>

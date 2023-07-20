@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                    <span class="fw-semibold d-block">&commat;{{ auth()->user()->name }}</span>
                                     <small
                                         class="text-muted">{{ auth()->user()->roles->pluck('name')->first() }}</small>
                                 </div>

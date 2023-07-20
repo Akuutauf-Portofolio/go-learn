@@ -25,6 +25,10 @@ Route::get('/', [PageController::class, 'landing_page'])->name('landing.page');
 Route::get('/logout', [AuthController::class, 'doLogout'])->name('do.logout');
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password.page');
 
+// error page
+Route::get('/error-page', [PageController::class, 'error_page'])->name('error.page');
+Route::get('/unauthorized-page', [PageController::class, 'unauthorized_page'])->name('unauthorized.page');
+
 // verification
 Route::get('/verify-code', [VerificationController::class, 'verify_code'])->name('verify.code');
 Route::get('/verify-email', [VerificationController::class, 'verify_email'])->name('verify.email');
@@ -59,4 +63,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/profile-admin/{admin_id}', [AdminProfileController::class, 'profile_admin'])->name('profile.admin.page');
     Route::put('/profile-admin/{admin_id}', [AdminProfileController::class, 'update'])->name('do.update.profile.admin');
     Route::put('/profile-admin/update-password/{admin_id}', [AdminProfileController::class, 'update_password'])->name('do.update.password.admin');
+
+    // management menu
+    Route::get('/manajemen-user', [AdminPageController::class, 'manage_user'])->name('manage.user.page');
+    Route::get('/manajemen-role', [AdminPageController::class, 'manage_role'])->name('manage.role.page');
+    Route::get('/manajemen-permission', [AdminPageController::class, 'manage_permission'])->name('manage.permission.page');
 });

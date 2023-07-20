@@ -13,7 +13,7 @@ class AdminProfileController extends Controller
     public function profile_admin($admin_id)
     {
         if (Auth::user()->id != $admin_id) {
-            abort(404);
+            return redirect()->route('error.page');
         }
 
         $data = [

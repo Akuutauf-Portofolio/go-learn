@@ -13,7 +13,7 @@ class UserProfileController extends Controller
     public function profile_user($user_id)
     {
         if (Auth::user()->id != $user_id) {
-            abort(404);
+            return redirect()->route('error.page');
         }
 
         $data = [
