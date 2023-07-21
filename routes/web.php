@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\VerificationController;
@@ -64,8 +65,18 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::put('/profile-admin/{admin_id}', [AdminProfileController::class, 'update'])->name('do.update.profile.admin');
     Route::put('/profile-admin/update-password/{admin_id}', [AdminProfileController::class, 'update_password'])->name('do.update.password.admin');
 
-    // management menu
+    // management user
     Route::get('/manajemen-user', [AdminPageController::class, 'manage_user'])->name('manage.user.page');
+
+    // management role
     Route::get('/manajemen-role', [AdminPageController::class, 'manage_role'])->name('manage.role.page');
-    Route::get('/manajemen-permission', [AdminPageController::class, 'manage_permission'])->name('manage.permission.page');
+});
+
+Route::middleware(['auth', 'permission:manage permit'])->group(function () {
+    // management permission
+    Route::get('/manajemen-permission', [PermissionController::class, 'index'])->name('manage.permission.page');
+    Route::post('/manajemen-permission/store', [PermissionController::class, 'store'])->name('manage.permission.store');
+    Route::get('/manajemen-permission/delete/{permission_id}', [PermissionController::class, 'destroy'])->name('manage.permission.destroy');
+    Route::get('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'edit'])->name('manage.permission.edit');
+    Route::put('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'update'])->name('manage.permission.update');
 });

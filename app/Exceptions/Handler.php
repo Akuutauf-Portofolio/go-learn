@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Spatie\Permission\Models\Role;
 use Throwable;
 
 
@@ -51,9 +52,8 @@ class Handler extends ExceptionHandler
     }
 
     // custom function for handling (user doesnt have a right permission)
-    public function render($request, Throwable $exception)
-    {
-        return redirect()->route('unauthorized.page');
-
-    }
+    // public function render($request, Throwable $exception)
+    // {
+    //     return redirect()->route('unauthorized.page');
+    // }
 }

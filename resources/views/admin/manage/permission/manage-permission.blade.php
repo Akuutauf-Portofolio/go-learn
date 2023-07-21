@@ -48,57 +48,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                        @php
+                                            $no = 1;
+                                        @endphp
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                        @foreach ($permissions as $item)
+                                            <tr>
+                                                <th scope="row">{{ $no }}</th>
+                                                <td>{{ $item->name }}</td>
+                                                <td>
+                                                    <center>
+                                                        <a href="{{ route('manage.permission.edit', $item->id) }}"
+                                                            class="btn btn-primary">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </a>
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                                        <a href="{{ route('manage.permission.destroy', $item->id) }}"
+                                                            class="btn btn-danger">
+                                                            <i class="bx bx-trash"></i>
+                                                        </a>
+                                                    </center>
+                                                </td>
+                                            </tr>
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
+                                            @php
+                                                $no++;
+                                            @endphp
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-form-user" role="tabpanel">
@@ -109,18 +89,25 @@
                                         <h5 class="mb-0">Form tambah data role</h5>
                                         <small class="text-muted float-end">Insert new permission</small>
                                     </div>
+
                                     <div class="card-body">
-                                        <form action="#" method="POST">
+
+                                        <form action="{{ route('manage.permission.store') }}" method="POST">
                                             @csrf
 
                                             <div class="mb-3">
                                                 <label class="form-label" for="name">Nama</label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    placeholder="Nama Permission" />
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror" id="name"
+                                                    name="name" placeholder="Nama Permission" />
+                                                @error('name')
+                                                    <div id="name" class="form-text">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Tambah Permission</button>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>

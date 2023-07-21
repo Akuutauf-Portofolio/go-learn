@@ -140,10 +140,23 @@
                                                 </div>
                                             </div>
 
+                                            <div class="mb-3 form-password-toggle">
+                                                <label class="form-label" for="password">Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="text" id="password" class="form-control"
+                                                        name="password"
+                                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                        aria-describedby="password" />
+                                                    <span class="input-group-text cursor-pointer">
+                                                        <i class="bx bx-hide"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+
                                             <div class="mb-3">
                                                 <label class="form-label" for="birthdate">Tanggal Lahir</label>
-                                                <input type="date" class="form-control" id="birthdate" name="birthdate"
-                                                    placeholder="Tanggal lahir user" />
+                                                <input type="date" class="form-control" id="birthdate"
+                                                    name="birthdate" placeholder="Tanggal lahir user" />
                                             </div>
 
                                             <div class="mb-3">

@@ -47,6 +47,8 @@
                             <label class="form-check-label" for="accountActivation">Saya mengkonfirmasi
                                 penonaktifan/penghapusan akun.</label>
                         </div>
+
+                        {{-- Modal Button --}}
                         <button type="button" class="btn btn-danger deactivate-account mt-2" data-bs-toggle="modal"
                             data-bs-target="#modal_delete_account">Lanjutkan Hapus Akun</button>
 
