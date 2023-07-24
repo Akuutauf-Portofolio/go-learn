@@ -70,7 +70,6 @@
                                                     </center>
                                                 </td>
                                             </tr>
-
                                             @php
                                                 $no++;
                                             @endphp

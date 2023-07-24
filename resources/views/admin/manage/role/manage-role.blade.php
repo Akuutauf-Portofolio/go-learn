@@ -29,7 +29,7 @@
                         <div class="card">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-header">Tabel User</h5>
+                                    <h5 class="card-header">Tabel Role</h5>
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <div class="btn btn-primary my-4" onclick="window.print()">
@@ -44,58 +44,40 @@
                                         <tr class="text-nowrap">
                                             <th width="10%">#</th>
                                             <th class="text-center">Nama Role</th>
+                                            <th class="text-center">Guard Name</th>
                                             <th width="15%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                        @php
+                                            $no = 1;
+                                        @endphp
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                        @foreach ($roles as $item)
+                                            <tr>
+                                                <th scope="row">{{ $no }}</th>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->guard_name }}</td>
+                                                <td>
+                                                    <center>
+                                                        <a href="{{ route('manage.role.edit', $item->id) }}"
+                                                            class="btn btn-primary">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </a>
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Table cell</td>
-                                            <td>
-                                                <center>
-                                                    <a href="#" class="btn btn-primary">
-                                                        <i class="bx bx-pencil"></i>
-                                                    </a>
+                                                        <a href="{{ route('manage.role.destroy', $item->id) }}"
+                                                            class="btn btn-danger">
+                                                            <i class="bx bx-trash">
+                                                            </i>
+                                                        </a>
+                                                    </center>
+                                                </td>
+                                            </tr>
 
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="bx bx-trash">
-                                                        </i>
-                                                    </a>
-                                                </center>
-                                            </td>
-                                        </tr>
+                                            @php
+                                                $no++;
+                                            @endphp
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -110,16 +92,57 @@
                                         <small class="text-muted float-end">Insert new role</small>
                                     </div>
                                     <div class="card-body">
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('manage.role.store') }}" method="POST">
                                             @csrf
 
                                             <div class="mb-3">
                                                 <label class="form-label" for="name">Nama</label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    placeholder="Nama Role" />
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror" id="name"
+                                                    name="name" placeholder="Nama Role" />
+                                                @error('name')
+                                                    <div id="name" class="form-text">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Tambah Role</button>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="text-nowrap">
+                                                        <th width="10%">#</th>
+                                                        <th>Nama Permission</th>
+                                                        <th>Guard Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+
+                                                    @foreach ($permissions as $item)
+                                                        <tr>
+                                                            <td>{{ $no }}</td>
+                                                            <td class="d-flex">
+                                                                <div class="form-check my-auto">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="{{ $item->id }}"
+                                                                        name="{{ $item->id }}"
+                                                                        id="{{ $item->id }}" />
+                                                                    <label class="form-check-label"
+                                                                        for="{{ $item->id }}">
+                                                                        {{ $item->name }}
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{ $item->guard_name }}</td>
+                                                        </tr>
+                                                        @php
+                                                            $no++;
+                                                        @endphp
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+                                            <button type="submit" class="btn btn-primary mt-3">Tambah Role</button>
                                         </form>
                                     </div>
                                 </div>

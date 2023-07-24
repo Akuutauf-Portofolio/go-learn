@@ -15,9 +15,4 @@ class AdminPageController extends Controller
     {
         return view('admin.manage.user.manage-user');
     }
-
-    public function manage_role()
-    {
-        return view('admin.manage.role.manage-role');
-    }
 }

@@ -52,8 +52,13 @@ class Handler extends ExceptionHandler
     }
 
     // custom function for handling (user doesnt have a right permission)
-    // public function render($request, Throwable $exception)
-    // {
-    //     return redirect()->route('unauthorized.page');
-    // }
+    public function render($request, Throwable $exception)
+    {
+        // Jika jenis pengecualian bukan jenis validasi Laravel, alihkan ke halaman handling eror kustom
+        if (!$exception instanceof \Illuminate\Validation\ValidationException) {
+            return redirect()->route('unauthorized.page');
+        }
+
+        return parent::render($request, $exception);
+    }
 }

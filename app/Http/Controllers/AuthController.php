@@ -61,7 +61,15 @@ class AuthController extends Controller
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
-        // mengecek kredential ketika request login berlangsung
+        // Mengecek apakah user memiliki role yang diizinkan untuk login
+        $user = User::where('email', $credentials['email'])->first();
+        if (!$user || !$user->hasAnyRole(['admin', 'user'])) {
+            return back()->withErrors([
+                'email' => 'User must have valid role to log in.',
+            ])->onlyInput('email');
+        }
+
+        // Jika user memiliki role yang diizinkan, mencoba proses login
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -77,7 +85,6 @@ class AuthController extends Controller
             'email' => 'Email and password invalid.',
         ])->onlyInput('email');
     }
-
 
     public function doLogout(Request $request)
     {
