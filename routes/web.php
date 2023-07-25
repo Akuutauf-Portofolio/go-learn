@@ -64,7 +64,7 @@ Route::middleware('auth', 'role:user', 'permission:edit profile')->group(functio
 });
 
 // setting user
-Route::middleware('auth', 'role:user', 'permission:delete account')->group(function () {
+Route::middleware('auth', 'permission:delete account')->group(function () {
     Route::get('/setting-user/{user_id}', [UserPageController::class, 'setting_user'])->name('setting.user.page');
     Route::post('/delete-account-user/{user_id}', [UserPageController::class, 'delete_account'])->name('do.delete.account.user');
 });

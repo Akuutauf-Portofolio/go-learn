@@ -41,11 +41,11 @@ class RoleSeeder extends Seeder
         ]);
 
         // ambil data permit yang lain untuk user (wishlist book, can booking, can read, review book)
-        $withlist_book = $permissions->where('name', 'wishlist book')->first();
+        $wishlist_book = $permissions->where('name', 'wishlist book')->first();
         $can_booking = $permissions->where('name', 'can booking')->first();
         $can_read = $permissions->where('name', 'can read')->first();
-        $review_book = $permissions->where('name', 'review_book')->first();
+        $review_book = $permissions->where('name', 'review book')->first();
         $delete_account = $permissions->where('name', 'delete account')->first();
-        $user->givePermissionTo([$edit_profile, $forgot_password, $search_book, $withlist_book, $can_booking, $can_read, $review_book, $delete_account]);
+        $user->givePermissionTo([$edit_profile, $forgot_password, $search_book, $wishlist_book, $can_booking, $can_read, $review_book, $delete_account]);
     }
 }

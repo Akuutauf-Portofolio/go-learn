@@ -89,8 +89,13 @@ class RoleController extends Controller
      */
     public function edit($role_id)
     {
+        $role = Role::findOrFail($role_id);
+        $permissions = $role->permissions()->get();
+
         $data = [
-            'role'  => Role::find($role_id),
+            'role' => $role,
+            'permissions' => Permission::all(),
+            'role_permissions' => $permissions,
             'action' => route('manage.role.update', $role_id),
         ];
 
@@ -104,9 +109,40 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $role_id)
     {
-        //
+        // validasi field role
+        $validated = $request->validate([
+            'name' => ['required', Rule::unique('roles')->ignore($role_id)],
+        ]);
+
+        // update role
+        $role = Role::findOrFail($role_id);
+        $formattedName = strtolower($validated['name']);
+        $role->name = $formattedName;
+        $role->save();
+
+        // Ambil data permission dari model Permission
+        $permissions = Permission::all();
+        $check_permissions = $request->except('_token', 'name');
+
+        // Loop untuk mencocokkan dan meng-assign permission ke role baru
+        if ($check_permissions) {
+            foreach ($permissions as $permission) {
+                if (array_key_exists($permission->id, $check_permissions)) {
+                    // Assign permission yang dipilih
+                    $role->givePermissionTo($permission);
+                } else {
+                    // Revoke permission yang tidak dipilih
+                    $role->revokePermissionTo($permission);
+                }
+            }
+        } else {
+            // Jika tidak ada permission yang dipilih, revoke semua permission dari role
+            $role->revokePermissionTo($permissions);
+        }
+
+        return redirect()->route('manage.role.page');
     }
 
     /**

@@ -66,11 +66,6 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name' => 'whislist book',
-            'guard_name' => 'web',
-        ]);
-
-        Permission::create([
             'name' => 'can booking',
             'guard_name' => 'web',
         ]);
@@ -82,6 +77,11 @@ class PermissionSeeder extends Seeder
 
         Permission::create([
             'name' => 'review book',
+            'guard_name' => 'web',
+        ]);
+
+        Permission::create([
+            'name' => 'wishlist book',
             'guard_name' => 'web',
         ]);
     }
