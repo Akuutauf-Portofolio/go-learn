@@ -142,7 +142,7 @@
                                             <div class="input-group input-group-merge">
                                                 <input type="password" id="old_password"
                                                     class="form-control @error('old_password') is-invalid @enderror"
-                                                    name="old_password" placeholder="Password Lama Anda"
+                                                    name="old_password" placeholder="Password lama"
                                                     aria-describedby="old_password" />
                                                 <span class="input-group-text cursor-pointer" id="toggle_old_password"><i
                                                         class="bx bx-hide"></i></span>
@@ -158,7 +158,7 @@
                                             <div class="input-group input-group-merge">
                                                 <input type="password" id="new_password"
                                                     class="form-control @error('new_password') is-invalid @enderror"
-                                                    name="new_password" placeholder="Password Lama Anda"
+                                                    name="new_password" placeholder="Password baru"
                                                     aria-describedby="new_password" />
                                                 <span class="input-group-text cursor-pointer" id="toggle_new_password"><i
                                                         class="bx bx-hide"></i></span>
@@ -169,12 +169,13 @@
                                         </div>
 
                                         <div class="mb-3 col-md-12">
-                                            <label for="confirm_new_password" class="form-label">Password Baru</label>
+                                            <label for="confirm_new_password" class="form-label">Konfirmasi Password
+                                                Baru</label>
 
                                             <div class="input-group input-group-merge">
                                                 <input type="password" id="confirm_new_password"
                                                     class="form-control @error('confirm_new_password') is-invalid @enderror"
-                                                    name="confirm_new_password" placeholder="Password Lama Anda"
+                                                    name="confirm_new_password" placeholder="Konfirmasi password"
                                                     aria-describedby="confirm_new_password" />
                                                 <span class="input-group-text cursor-pointer"
                                                     id="toggle_confirm_new_password"><i class="bx bx-hide"></i></span>

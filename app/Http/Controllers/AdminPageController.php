@@ -10,9 +10,4 @@ class AdminPageController extends Controller
     {
         return view('admin.dashboard-admin');
     }
-
-    public function manage_user()
-    {
-        return view('admin.manage.user.manage-user');
-    }
 }
