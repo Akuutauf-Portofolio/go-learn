@@ -160,6 +160,29 @@ class UserController extends Controller
         return redirect()->route('manage.user.page');
     }
 
+    public function update_password(Request $request, $user_id)
+    {
+        $data = User::findOrFail($user_id);
+
+        // validasi field
+        $request->validate([
+            'old_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'confirm_new_password' => 'required|same:new_password',
+        ]);
+
+        // Memeriksa apakah kata sandi lama yang dimasukkan sesuai dengan kata sandi saat ini
+        if (!Hash::check($request->old_password, $data->password)) {
+            return back()->withErrors(['old_password' => 'Password lama tidak valid.']);
+        }
+
+        // Update kata sandi baru
+        $data->password = Hash::make($request->new_password);
+        $data->save();
+
+        return redirect()->route('manage.user.page', $user_id);
+    }
+
 
     /**
      * Remove the specified resource from storage.

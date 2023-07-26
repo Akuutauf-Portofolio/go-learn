@@ -80,7 +80,11 @@ Route::middleware('auth', 'permission:manage user')->group(function () {
     Route::post('/manajemen-user/store', [UserController::class, 'store'])->name('manage.user.store');
     Route::get('/manajemen-user/delete/{user_id}', [UserController::class, 'destroy'])->name('manage.user.destroy');
     Route::get('/manajemen-user/ubah/{user_id}', [UserController::class, 'edit'])->name('manage.user.edit');
-    Route::put('/manajemen-ubah/ubah/{user_id}', [UserController::class, 'update'])->name('manage.user.update');
+    Route::put('/manajemen-user/ubah/{user_id}', [UserController::class, 'update'])->name('manage.user.update');
+    Route::put('/manajemen-user/update-password-user/{user_id}', [UserController::class, 'update_password'])->name('manage.update.password.user');
+});
+
+Route::middleware('auth', 'permission:manage special permission')->group(function () {
 });
 
 // management permission

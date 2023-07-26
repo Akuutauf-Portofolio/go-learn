@@ -99,12 +99,13 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Ubah User</button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fa-solid fa-floppy-disk"></i>&ensp; Ubah User</button>
 
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#modal_change_password" id="change_password_button"
                                         name="change_password_button">
-                                        Ubah Password
+                                        <i class="fa-solid fa-key"></i>&ensp; Ubah Password
                                     </button>
                                 </form>
 
@@ -124,7 +125,8 @@
                                                 <!--end::Close-->
                                             </div>
 
-                                            <form action="#" id="formAccountSettings" method="POST">
+                                            <form action="{{ route('manage.update.password.user', $user->id) }}"
+                                                id="formAccountSettings" method="POST">
                                                 @method('put')
                                                 @csrf
 
@@ -199,6 +201,7 @@
                                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>

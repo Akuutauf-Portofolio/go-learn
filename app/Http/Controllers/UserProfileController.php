@@ -142,7 +142,7 @@ class UserProfileController extends Controller
 
         // Memeriksa apakah kata sandi lama yang dimasukkan sesuai dengan kata sandi saat ini
         if (!Hash::check($request->old_password, $data->password)) {
-            return back();
+            return back()->withErrors(['old_password' => 'Password lama tidak valid.']);
         }
 
         // Update kata sandi baru

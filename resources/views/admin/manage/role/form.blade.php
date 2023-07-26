@@ -68,7 +68,8 @@
                                         </tbody>
                                     </table>
 
-                                    <button type="submit" class="btn btn-primary mt-3">Ubah Role</button>
+                                    <button type="submit" class="btn btn-primary mt-3"><i
+                                            class="fa-solid fa-floppy-disk"></i>&ensp; Ubah Role</button>
                                 </form>
                             </div>
                         </div>

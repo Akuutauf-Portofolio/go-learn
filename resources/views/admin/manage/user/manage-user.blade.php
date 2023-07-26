@@ -30,9 +30,15 @@
                                 <div class="col">
                                     <h5 class="card-header">Tabel User</h5>
                                 </div>
-                                <div class="col d-flex justify-content-end">
+                                <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12 d-flex justify-content-around">
+                                    @can('manage special permission')
+                                        <div class="btn btn-warning my-4">
+                                            <i class="fa-solid fa-star"></i>&ensp; Special Permissions
+                                        </div>
+                                    @endcan
+
                                     <div class="btn btn-primary my-4" onclick="window.print()">
-                                        Cetak Data User
+                                        <i class="fa-solid fa-print"></i>&ensp; Cetak Data User
                                     </div>
                                 </div>
                             </div>
@@ -69,12 +75,12 @@
                                                 <td>
                                                     <center>
                                                         <a href="{{ route('manage.user.edit', $data->id) }}"
-                                                            class="btn btn-primary">
+                                                            class="btn btn-primary" title="Edit user">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
 
                                                         <a href="{{ route('manage.user.destroy', $data->id) }}"
-                                                            class="btn btn-danger">
+                                                            class="btn btn-danger" title="Hapus user">
                                                             <i class="bx bx-trash">
                                                             </i>
                                                         </a>
@@ -190,7 +196,8 @@
                                                 @enderror
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Tambah User</button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-plus"></i>&ensp; Tambah User</button>
                                         </form>
                                     </div>
                                 </div>

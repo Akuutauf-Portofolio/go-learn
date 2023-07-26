@@ -26,14 +26,15 @@
                                 id="uploadedAvatar" />
                             <div class="button-wrapper">
                                 <label for="photo" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                    <span class="d-none d-sm-block">Unggah foto baru</span>
+                                    <span class="d-none d-sm-block"><i class="fa-solid fa-upload"></i>&ensp; Unggah foto
+                                        baru</span>
                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                     <input type="file" id="photo" name="photo" class="account-file-input" hidden />
                                 </label>
                                 <button type="reset" class="btn btn-outline-secondary account-image-reset mb-4"
                                     onclick="resetImage()">
                                     <i class="bx bx-reset d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Batal</span>
+                                    <span class="d-none d-sm-block"><i class="fa-solid fa-ban"></i>&ensp; Batal</span>
                                 </button>
 
                                 <p class="text-muted mb-0">Allowed JPG, JPEG, or PNG. Max size of 5Mb</p>
@@ -99,14 +100,16 @@
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#modal_change_password" id="change_password_button"
                                     name="change_password_button">
-                                    Ubah Password
+                                    <i class="fa-solid fa-key"></i>&ensp; Ubah Password
                                 </button>
                             </div>
                         </div>
 
                         <div class="mt-2">
-                            <button type="submit" class="btn btn-primary me-2">Simpan perubahan</button>
-                            <button type="reset" class="btn btn-outline-secondary">Batal</button>
+                            <button type="submit" class="btn btn-primary me-2"><i
+                                    class="fa-solid fa-floppy-disk"></i>&ensp; Simpan perubahan</button>
+                            <button type="reset" class="btn btn-outline-secondary"><i
+                                    class="fa-solid fa-ban"></i>&ensp; Batal</button>
                         </div>
                     </div>
                 </form>
@@ -191,7 +194,8 @@
                                 <div class="modal-footer">
                                     <a href="#" type="button" class="btn btn-light"
                                         data-bs-dismiss="modal">Tutup</a>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fa-solid fa-floppy-disk"></i>&ensp; Simpan</button>
                                 </div>
                             </form>
                         </div>

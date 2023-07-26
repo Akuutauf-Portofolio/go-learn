@@ -30,11 +30,12 @@ class RoleSeeder extends Seeder
         $manage_permit = $permissions->where('name', 'manage permit')->first();
         $manage_role = $permissions->where('name', 'manage role')->first();
         $manage_user = $permissions->where('name', 'manage user')->first();
+        $manage_special_permission = $permissions->where('name', 'manage special permission')->first();
         $manage_category = $permissions->where('name', 'manage category')->first();
         $manage_book = $permissions->where('name', 'manage book')->first();
         $accept_booking = $permissions->where('name', 'accept booking')->first();
         $search_book = $permissions->where('name', 'search book')->first();
-        $admin->givePermissionTo([$edit_profile, $forgot_password, $manage_spatie, $manage_permit, $manage_role, $manage_user, $manage_category, $manage_book, $accept_booking, $search_book]);
+        $admin->givePermissionTo([$edit_profile, $forgot_password, $manage_spatie, $manage_permit, $manage_role, $manage_user, $manage_special_permission, $manage_category, $manage_book, $accept_booking, $search_book]);
 
         $user = Role::create([
             'name' => 'user',

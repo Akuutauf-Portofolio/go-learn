@@ -50,7 +50,8 @@
 
                         {{-- Modal Button --}}
                         <button type="button" class="btn btn-danger deactivate-account mt-2" data-bs-toggle="modal"
-                            data-bs-target="#modal_delete_account">Lanjutkan Hapus Akun</button>
+                            data-bs-target="#modal_delete_account"><i class="fa-solid fa-ban"></i>&ensp; Lanjutkan Hapus
+                            Akun</button>
 
                         {{-- Modal Delete Account --}}
                         <div class="modal fade" tabindex="-1" id="modal_delete_account">
@@ -78,8 +79,9 @@
                                         <button type="button" class="btn btn-light"
                                             data-bs-dismiss="modal">Batalkan</button>
 
-                                        <button type="submit" class="btn btn-danger" id="deleteAccountBtn" disabled>Hapus
-                                            Akun</button>
+                                        <button type="submit" class="btn btn-danger" id="deleteAccountBtn" disabled>
+                                            <i class="fa-solid fa-ban"></i>&ensp; Hapus Akun
+                                        </button>
                                     </div>
                                 </div>
                             </div>

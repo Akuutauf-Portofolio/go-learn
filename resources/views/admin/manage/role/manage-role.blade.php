@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <div class="btn btn-primary my-4" onclick="window.print()">
-                                        Cetak Data Role
+                                        <i class="fa-solid fa-print"></i>&ensp; Cetak Data Role
                                     </div>
                                 </div>
                             </div>
@@ -61,12 +61,12 @@
                                                 <td>
                                                     <center>
                                                         <a href="{{ route('manage.role.edit', $item->id) }}"
-                                                            class="btn btn-primary">
+                                                            class="btn btn-primary" title="Edit role">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
 
                                                         <a href="{{ route('manage.role.destroy', $item->id) }}"
-                                                            class="btn btn-danger">
+                                                            class="btn btn-danger" title="Hapus role">
                                                             <i class="bx bx-trash">
                                                             </i>
                                                         </a>
@@ -142,7 +142,8 @@
                                                 </tbody>
                                             </table>
 
-                                            <button type="submit" class="btn btn-primary mt-3">Tambah Role</button>
+                                            <button type="submit" class="btn btn-primary mt-3"><i
+                                                    class="fa-solid fa-plus"></i>&ensp; Tambah Role</button>
                                         </form>
                                     </div>
                                 </div>

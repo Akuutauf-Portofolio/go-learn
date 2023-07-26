@@ -33,7 +33,8 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Ubah Permission</button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fa-solid fa-floppy-disk"></i>&ensp; Ubah Permission</button>
                                 </form>
 
                             </div>

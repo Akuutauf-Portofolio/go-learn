@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <div class="btn btn-primary my-4" onclick="window.print()">
-                                        Cetak Data Permission
+                                        <i class="fa-solid fa-print"></i>&ensp; Cetak Data Permission
                                     </div>
                                 </div>
                             </div>
@@ -60,11 +60,11 @@
                                                     <center>
                                                         <a href="{{ route('manage.permission.edit', $item->id) }}"
                                                             class="btn btn-primary">
-                                                            <i class="bx bx-pencil"></i>
+                                                            <i class="bx bx-pencil" title="Edit permission"></i>
                                                         </a>
 
                                                         <a href="{{ route('manage.permission.destroy', $item->id) }}"
-                                                            class="btn btn-danger">
+                                                            class="btn btn-danger" title="Hapus permission">
                                                             <i class="bx bx-trash"></i>
                                                         </a>
                                                     </center>
@@ -104,7 +104,8 @@
                                                 @enderror
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Tambah Permission</button>
+                                            <button type="submit" class="btn btn-primary"><i
+                                                    class="fa-solid fa-plus"></i>&ensp; Tambah Permission</button>
                                         </form>
 
                                     </div>
