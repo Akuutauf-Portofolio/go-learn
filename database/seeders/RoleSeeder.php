@@ -26,6 +26,7 @@ class RoleSeeder extends Seeder
         // ambil data permit milik admin (edit profile, forgot password, manage permit, manage category, manage book, accept booking, search book)
         $edit_profile = $permissions->where('name', 'edit profile')->first();
         $forgot_password = $permissions->where('name', 'forgot password')->first();
+        $manage_spatie = $permissions->where('name', 'manage spatie')->first();
         $manage_permit = $permissions->where('name', 'manage permit')->first();
         $manage_role = $permissions->where('name', 'manage role')->first();
         $manage_user = $permissions->where('name', 'manage user')->first();
@@ -33,7 +34,7 @@ class RoleSeeder extends Seeder
         $manage_book = $permissions->where('name', 'manage book')->first();
         $accept_booking = $permissions->where('name', 'accept booking')->first();
         $search_book = $permissions->where('name', 'search book')->first();
-        $admin->givePermissionTo([$edit_profile, $forgot_password, $manage_permit, $manage_role, $manage_user, $manage_category, $manage_book, $accept_booking, $search_book]);
+        $admin->givePermissionTo([$edit_profile, $forgot_password, $manage_spatie, $manage_permit, $manage_role, $manage_user, $manage_category, $manage_book, $accept_booking, $search_book]);
 
         $user = Role::create([
             'name' => 'user',

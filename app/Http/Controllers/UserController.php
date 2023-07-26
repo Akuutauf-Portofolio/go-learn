@@ -116,10 +116,50 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', Rule::unique('users')->ignore($user_id)],
+            'email' => ['required', 'string', 'max:100', 'email', Rule::unique('users')->ignore($user_id)],
+            'birthdate' => ['required', 'date'],
+            'gender' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'role' => ['required'],
+        ]);
+
+        $user = User::findOrFail($user_id);
+
+        // Update user data
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'birthdate' => $validated['birthdate'],
+            'gender' => $validated['gender'],
+            'phone' => $validated['phone'],
+        ]);
+
+        // Ambil ID role baru dari request
+        $roleId = $request->role;
+
+        // Ambil data role lama dari user
+        $old_role = $user->roles->first();
+
+        // Validasi keberadaan ID role dalam database
+        $role = Role::findOrFail($roleId);
+
+        // Revoke role dan permission lama
+        if ($old_role) {
+            $user->removeRole($old_role);
+            $user->revokePermissionTo($old_role->permissions);
+        }
+
+        // Assign role baru dan permission dari role tersebut ke user
+        $user->assignRole($role);
+        $user->givePermissionTo($role->permissions);
+
+        return redirect()->route('manage.user.page');
     }
+
 
     /**
      * Remove the specified resource from storage.

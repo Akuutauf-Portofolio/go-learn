@@ -55,9 +55,9 @@
                                         @endphp
                                         @foreach ($users as $data)
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">{{ $no }}</th>
                                                 <td>{{ $data->name }}</td>
-                                                <td>{{ auth()->user()->roles->pluck('name')->first() }}</td>
+                                                <td>{{ $data->roles->first()->name }}</td>
                                                 <td>{{ $data->email }}</td>
                                                 <td>
                                                     @if ($data->phone == null)
@@ -81,6 +81,9 @@
                                                     </center>
                                                 </td>
                                             </tr>
+                                            @php
+                                                $no++;
+                                            @endphp
                                         @endforeach
                                     </tbody>
                                 </table>

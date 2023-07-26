@@ -18,6 +18,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="{{ $action }}" method="POST">
+                                    @method('put')
                                     @csrf
 
                                     <div class="mb-3">
@@ -98,7 +99,7 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Tambah User</button>
+                                    <button type="submit" class="btn btn-primary">Ubah User</button>
 
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#modal_change_password" id="change_password_button"

@@ -55,7 +55,13 @@
                 @endguest
 
                 @auth
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali ke halaman sebelumnya</a>
+                    @if (auth()->user()->hasRole('admin'))
+                        <a href="{{ route('dashboard.admin.page') }}" class="btn btn-primary">Kembali ke halaman
+                            dashboard</a>
+                    @else
+                        <a href="{{ route('dashboard.user.page') }}" class="btn btn-primary">Kembali ke halaman
+                            dashboard</a>
+                    @endif
                 @endauth
             </div>
         </div>

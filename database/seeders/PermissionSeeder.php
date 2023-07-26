@@ -31,6 +31,11 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'manage spatie',
+            'guard_name' => 'web',
+        ]);
+
+        Permission::create([
             'name' => 'manage permit',
             'guard_name' => 'web',
         ]);
