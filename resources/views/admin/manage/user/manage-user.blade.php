@@ -32,9 +32,9 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12 d-flex justify-content-around">
                                     @can('manage special permission')
-                                        <div class="btn btn-warning my-4">
+                                        <a href="{{ route('manage.special.permission.page') }}" class="btn btn-warning my-4">
                                             <i class="fa-solid fa-star"></i>&ensp; Special Permissions
-                                        </div>
+                                        </a>
                                     @endcan
 
                                     <div class="btn btn-primary my-4" onclick="window.print()">

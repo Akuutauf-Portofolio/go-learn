@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SpecialPermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserProfileController;
@@ -85,15 +86,9 @@ Route::middleware('auth', 'permission:manage user')->group(function () {
 });
 
 Route::middleware('auth', 'permission:manage special permission')->group(function () {
-});
-
-// management permission
-Route::middleware(['auth', 'permission:manage permit'])->group(function () {
-    Route::get('/manajemen-permission', [PermissionController::class, 'index'])->name('manage.permission.page');
-    Route::post('/manajemen-permission/store', [PermissionController::class, 'store'])->name('manage.permission.store');
-    Route::get('/manajemen-permission/delete/{permission_id}', [PermissionController::class, 'destroy'])->name('manage.permission.destroy');
-    Route::get('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'edit'])->name('manage.permission.edit');
-    Route::put('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'update'])->name('manage.permission.update');
+    Route::get('/manajemen-special-permission-user', [SpecialPermissionController::class, 'index'])->name('manage.special.permission.page');
+    Route::get('/manajemen-special-permission-user/ubah-permission/{user_id}', [SpecialPermissionController::class, 'edit'])->name('manage.special.permission.edit');
+    Route::put('/manajemen-special-permission-user/ubah-permission/{user_id}', [SpecialPermissionController::class, 'update'])->name('manage.special.permission.update');
 });
 
 // management role
@@ -103,4 +98,13 @@ Route::middleware(['auth', 'permission:manage role'])->group(function () {
     Route::get('/manajemen-role/delete/{role_id}', [RoleController::class, 'destroy'])->name('manage.role.destroy');
     Route::get('/manajemen-role/ubah/{role_id}', [RoleController::class, 'edit'])->name('manage.role.edit');
     Route::put('/manajemen-role/ubah/{role_id}', [RoleController::class, 'update'])->name('manage.role.update');
+});
+
+// management permission
+Route::middleware(['auth', 'permission:manage permit'])->group(function () {
+    Route::get('/manajemen-permission', [PermissionController::class, 'index'])->name('manage.permission.page');
+    Route::post('/manajemen-permission/store', [PermissionController::class, 'store'])->name('manage.permission.store');
+    Route::get('/manajemen-permission/delete/{permission_id}', [PermissionController::class, 'destroy'])->name('manage.permission.destroy');
+    Route::get('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'edit'])->name('manage.permission.edit');
+    Route::put('/manajemen-permission/ubah/{permission_id}', [PermissionController::class, 'update'])->name('manage.permission.update');
 });

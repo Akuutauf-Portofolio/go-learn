@@ -22,6 +22,11 @@
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
 
+    {{-- Font awesome icon cdn --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     {{-- Css style --}}
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/css/core.css') }}"
@@ -49,17 +54,20 @@
                     data-app-dark-img="illustrations/page-misc-error-dark.png"
                     data-app-light-img="illustrations/page-misc-error-light.png" />
             </div>
-            <div class="mt-4">
+            <div class="mt-5">
                 @guest
-                    <a href="{{ route('login.page') }}" class="btn btn-primary">Masuk halaman login</a>
+                    <a href="{{ route('login.page') }}" class="btn btn-primary"><i
+                            class="fa-solid fa-right-to-bracket"></i>&ensp; Masuk halaman login</a>
                 @endguest
 
                 @auth
                     @if (auth()->user()->hasRole('admin'))
-                        <a href="{{ route('dashboard.admin.page') }}" class="btn btn-primary">Kembali ke halaman
+                        <a href="{{ route('dashboard.admin.page') }}" class="btn btn-primary"><i
+                                class="fa-solid fa-house"></i>&ensp; Kembali ke halaman
                             dashboard</a>
                     @else
-                        <a href="{{ route('dashboard.user.page') }}" class="btn btn-primary">Kembali ke halaman
+                        <a href="{{ route('dashboard.user.page') }}" class="btn btn-primary"><i
+                                class="fa-solid fa-house"></i>&ensp; Kembali ke halaman
                             dashboard</a>
                     @endif
                 @endauth
