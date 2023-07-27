@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -71,6 +72,8 @@ class UserController extends Controller
 
         // Assign role ke user baru
         $new_user->assignRole($role);
+
+        Alert::success('Success Insert', 'User berhasil ditambahkan');
 
         return redirect()->route('manage.user.page');
     }
@@ -157,6 +160,8 @@ class UserController extends Controller
         $user->assignRole($role);
         $user->givePermissionTo($role->permissions);
 
+        Alert::success('Success Update', 'Data profil user berhasil diubah');
+
         return redirect()->route('manage.user.page');
     }
 
@@ -180,6 +185,8 @@ class UserController extends Controller
         $data->password = Hash::make($request->new_password);
         $data->save();
 
+        Alert::success('Success Update', 'Password user berhasil diubah');
+
         return redirect()->route('manage.user.page', $user_id);
     }
 
@@ -200,6 +207,8 @@ class UserController extends Controller
 
         // Delete the user
         $user->delete();
+
+        Alert::success('Success Delete', 'Data user berhasil dihapus');
 
         return redirect()->route('manage.user.page');
     }

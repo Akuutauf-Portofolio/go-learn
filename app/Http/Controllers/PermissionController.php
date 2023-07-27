@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PermissionController extends Controller
 {
@@ -50,6 +51,8 @@ class PermissionController extends Controller
             'name' => $formattedName,
             'guard_name' => 'web',
         ]);
+
+        Alert::success('Success Insert', 'Permission berhasil ditambahkan');
 
         return redirect()->route('manage.permission.page');
     }
@@ -100,6 +103,8 @@ class PermissionController extends Controller
             'name' => $formattedName,
         ]);
 
+        Alert::success('Success Update', 'Data permission berhasil diubah');
+
         return redirect()->route('manage.permission.page');
     }
 
@@ -113,6 +118,8 @@ class PermissionController extends Controller
     {
         $data = Permission::findOrFail($permission_id);
         $data->delete();
+
+        Alert::success('Success Delete', 'Data permission berhasil dihapus');
 
         return redirect()->route('manage.permission.page');
     }

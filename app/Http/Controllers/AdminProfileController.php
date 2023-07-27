@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminProfileController extends Controller
 {
@@ -93,11 +94,11 @@ class AdminProfileController extends Controller
         // validasi field
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required', 'email'],
             'photo' => 'mimes:jpg,jpeg,png|max:5120',
-            'birthdate' => 'required',
+            'birthdate' => ['required', 'date'],
             'gender' => 'required',
-            'phone' => 'required',
+            'phone' => ['required', 'max:12'],
         ]);
 
         // checking any field photo
@@ -126,6 +127,8 @@ class AdminProfileController extends Controller
             'phone' => $validated['phone'],
         ]);
 
+        Alert::success('Success Update', 'Data profil admin berhasil diubah');
+
         return redirect()->route('profile.admin.page', $data);
     }
 
@@ -149,7 +152,9 @@ class AdminProfileController extends Controller
         $data->password = Hash::make($request->new_password);
         $data->save();
 
-        return redirect()->route('profile.admin.page', $admin_id)->with('success', 'Berhasil mengubah data profile admin');
+        Alert::success('Success Update', 'Password user berhasil diubah');
+
+        return redirect()->route('profile.admin.page', $admin_id);
     }
 
     /**

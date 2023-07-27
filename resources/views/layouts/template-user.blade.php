@@ -45,6 +45,9 @@
 </head>
 
 <body>
+    {{-- alert include --}}
+    @include('sweetalert::alert')
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">

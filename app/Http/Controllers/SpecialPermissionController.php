@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SpecialPermissionController extends Controller
 {
@@ -137,6 +138,8 @@ class SpecialPermissionController extends Controller
                 // Jika tidak ada permission yang dipilih, revoke semua permission dari role
                 $user->revokePermissionTo($permissions);
             }
+
+            Alert::success('Success Update', 'Data permission user berhasil diubah');
 
             return redirect()->route('manage.special.permission.page');
         } else {

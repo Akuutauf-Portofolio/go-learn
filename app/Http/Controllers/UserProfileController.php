@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserProfileController extends Controller
 {
@@ -126,6 +127,8 @@ class UserProfileController extends Controller
             'phone' => $validated['phone'],
         ]);
 
+        Alert::success('Success Update', 'Data profil user berhasil diubah');
+
         return redirect()->route('profile.user.page', $user_id);
     }
 
@@ -148,6 +151,8 @@ class UserProfileController extends Controller
         // Update kata sandi baru
         $data->password = Hash::make($request->new_password);
         $data->save();
+
+        Alert::success('Success Update', 'Password user berhasil diubah');
 
         return redirect()->route('profile.user.page', $user_id);
     }

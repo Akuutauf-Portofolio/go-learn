@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserPageController extends Controller
 {
@@ -44,6 +45,8 @@ class UserPageController extends Controller
 
         // Hapus data user
         $user->delete();
+
+        Alert::toast('Success Delete Account', 'success');
 
         return redirect()->route('landing.page');
     }
