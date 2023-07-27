@@ -149,7 +149,7 @@ class AdminProfileController extends Controller
         $data->password = Hash::make($request->new_password);
         $data->save();
 
-        return redirect()->route('profile.admin.page', $admin_id);
+        return redirect()->route('profile.admin.page', $admin_id)->with('success', 'Berhasil mengubah data profile admin');
     }
 
     /**

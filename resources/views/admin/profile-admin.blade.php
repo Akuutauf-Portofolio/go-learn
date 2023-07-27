@@ -12,6 +12,14 @@
                     <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Akun</a>
                 </li>
             </ul>
+
+            @if (session('success'))
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card mb-4">
                 <h5 class="card-header">Detail Profil</h5>
                 <!-- Account -->
